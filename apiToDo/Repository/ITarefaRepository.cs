@@ -8,5 +8,6 @@ namespace apiToDo.Repository
     {
         List<Tarefas> lstTarefas();
         void InserirTarefa(Tarefas tarefas);
+        void DeletarTarefa(int id);
     }
 }

@@ -40,5 +40,21 @@ namespace apiToDo.Repository
                 throw ex;
             }
         }
+
+        public void DeletarTarefa(int id)
+        {
+            try
+            {
+                //Variavel que armazena a tarefa alvo com base no Id
+                var response = _lstTarefas.FirstOrDefault(t => t.Id == id);
+
+                //Remove a tarefa alvo, passando a tarefa alvo armazenada na variavel response
+                _lstTarefas.Remove(response);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }
