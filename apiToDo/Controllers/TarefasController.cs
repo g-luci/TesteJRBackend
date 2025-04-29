@@ -24,7 +24,7 @@ namespace apiToDo.Controllers
         {
             try
             {
-              
+                //Retorna a lista de tarefas com o CODE 200
                 return Ok(_trefaRepository.lstTarefas());
             }
 
@@ -39,8 +39,18 @@ namespace apiToDo.Controllers
         {
             try
             {
+                //Cria uma nova tarefa
+                var novaTarefa = new Tarefas
+                {
+                    Id = Request.ID_TAREFA,
+                    Descricao = Request.DS_TAREFA
+                };
 
-                return StatusCode(200);
+                //Inseri a nova tarefa
+                _trefaRepository.InserirTarefa(novaTarefa);
+
+                //Retorna a lista de tarefas com o CODE 200
+                return Ok(_trefaRepository.lstTarefas());
 
 
             }
