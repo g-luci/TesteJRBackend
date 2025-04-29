@@ -1,4 +1,5 @@
 ﻿using apiToDo.DTO;
+using apiToDo.Mappers;
 using apiToDo.Models;
 using apiToDo.Repository;
 using Microsoft.AspNetCore.Authorization;
@@ -25,13 +26,10 @@ namespace apiToDo.Controllers
         {
             try
             {
-                var tarefaDTO = _trefaRepository.lstTarefas().Select(x => new TarefaDTO
-                {
-                   ID_TAREFA = x.Id,
-                   DS_TAREFA = x.Descricao
-                }).ToList();
+                //Lista contendo as tarefas como DTO
+                var tarefaDTO = _trefaRepository.lstTarefas().Select(x => x.toDTO()).ToList();
 
-                //Retorna a lista de tarefas com o CODE 200
+                //Retorna a lista de tarefaDTO com o CODE 200
                 return Ok(tarefaDTO);
             }
 
@@ -56,8 +54,11 @@ namespace apiToDo.Controllers
                 //Inseri a nova tarefa
                 _trefaRepository.InserirTarefa(novaTarefa);
 
-                //Retorna a lista de tarefas com o CODE 200
-                return Ok(_trefaRepository.lstTarefas());
+                //Lista contendo as tarefas como DTO
+                var tarefaDTO = _trefaRepository.lstTarefas().Select(x => x.toDTO()).ToList();
+
+                //Retorna a lista de tarefaDTO com o CODE 200
+                return Ok(tarefaDTO);
 
 
             }
@@ -76,8 +77,11 @@ namespace apiToDo.Controllers
                 //Deleta a tarefa com base no Id passado
                 _trefaRepository.DeletarTarefa(ID_TAREFA);
 
-                //Retorna a lista de tarefas com o CODE 200
-                return Ok(_trefaRepository.lstTarefas());
+                //Lista contendo as tarefas como DTO
+                var tarefaDTO = _trefaRepository.lstTarefas().Select(x => x.toDTO()).ToList();
+
+                //Retorna a lista de tarefaDTO com o CODE 200
+                return Ok(tarefaDTO);
             }
 
             catch (Exception ex)
