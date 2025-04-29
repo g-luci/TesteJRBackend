@@ -1,4 +1,5 @@
 using apiToDo.Repository;
+using apiToDo.Seeder;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -8,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using Microsoft.OpenApi.Writers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,7 +29,8 @@ namespace apiToDo
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddTransient<ITarefaRepository, TarefaRepository>();
+            services.AddSingleton<ITarefaRepository, TarefaRepository>();
+            services.AddTransient<TarefaSeeder>();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
@@ -55,6 +58,12 @@ namespace apiToDo
             {
                 endpoints.MapControllers();
             });
+
+            using (var scope = app.ApplicationServices.CreateScope())
+            {
+                var seeder = scope.ServiceProvider.GetRequiredService<TarefaSeeder>();
+                seeder.Popular();
+            }
         }
     }
 }
