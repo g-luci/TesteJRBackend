@@ -1,5 +1,6 @@
 ﻿using apiToDo.DTO;
 using apiToDo.Models;
+using apiToDo.Repository;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -10,8 +11,15 @@ namespace apiToDo.Controllers
     [Route("[controller]")]
     public class TarefasController : ControllerBase
     {
+        private readonly ITarefaRepository _trefaRepository;
+
+        public TarefasController(ITarefaRepository trefaRepository)
+        {
+            _trefaRepository = trefaRepository;
+        }
+
         [Authorize]
-        [HttpPost("lstTarefas")]
+        [HttpGet("lstTarefas")]
         public ActionResult lstTarefas()
         {
             try
