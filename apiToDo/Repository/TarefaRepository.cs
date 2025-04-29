@@ -25,5 +25,20 @@ namespace apiToDo.Repository
                 throw e;
             }
         }
+
+        //Metodo para inserir uma nova tarefa na lista de tarefas
+        public void InserirTarefa(Tarefas tarefas)
+        {
+            try
+            {
+                //Adiciona a tarefa na lista de tarefa
+                _lstTarefas.Add(tarefas);
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

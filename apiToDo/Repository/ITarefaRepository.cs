@@ -7,5 +7,6 @@ namespace apiToDo.Repository
     public interface ITarefaRepository
     {
         List<Tarefas> lstTarefas();
+        void InserirTarefa(Tarefas tarefas);
     }
 }
