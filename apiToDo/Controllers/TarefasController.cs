@@ -4,6 +4,7 @@ using apiToDo.Repository;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Linq;
 
 namespace apiToDo.Controllers
 {
@@ -24,8 +25,14 @@ namespace apiToDo.Controllers
         {
             try
             {
+                var tarefaDTO = _trefaRepository.lstTarefas().Select(x => new TarefaDTO
+                {
+                   ID_TAREFA = x.Id,
+                   DS_TAREFA = x.Descricao
+                }).ToList();
+
                 //Retorna a lista de tarefas com o CODE 200
-                return Ok(_trefaRepository.lstTarefas());
+                return Ok(tarefaDTO);
             }
 
             catch (Exception ex)
