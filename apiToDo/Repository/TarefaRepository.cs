@@ -48,8 +48,17 @@ namespace apiToDo.Repository
                 //Variavel que armazena a tarefa alvo com base no Id
                 var response = _lstTarefas.FirstOrDefault(t => t.Id == id);
 
-                //Remove a tarefa alvo, passando a tarefa alvo armazenada na variavel response
-                _lstTarefas.Remove(response);
+                //Verifica se existe o Id passado existe
+                if (response == null)
+                {
+                    //Caso ele não exista, uma execeção é disparada
+                    throw new Exception($"O usuario esta tentando deletar a tarefa de codigo {id}");
+                }
+                else
+                {
+                    //Remove a tarefa alvo, passando a tarefa alvo armazenada na variavel response
+                    _lstTarefas.Remove(response);
+                }
             }
             catch (Exception ex)
             {
