@@ -25,7 +25,7 @@ namespace apiToDo.Controllers
             try
             {
               
-                return StatusCode(200);
+                return Ok(_trefaRepository.lstTarefas());
             }
 
             catch (Exception ex)
