@@ -95,10 +95,13 @@ namespace apiToDo.Controllers
         {
             try
             {
+                //Chama o metodo AtualizarTarefa e atualiza a tarefa com base na entidade passada
                 _trefaRepository.AtualizarTarefa(tarefa);
 
+                //Lista contendo as tarefas como DTO
                 var tarefaDTO = _trefaRepository.lstTarefas().Select(x => x.toDTO()).ToList();
 
+                //Retorna a lista de tarefaDTO com o CODE 200
                 return Ok(tarefaDTO);
             }
             catch(Exception ex) 
@@ -112,8 +115,10 @@ namespace apiToDo.Controllers
         {
             try
             {
+                //Busca a tarefa com base no Id e logo em seguida, transforma em um DTO
                 var tarefaDTO = _trefaRepository.BuscarTarefa(id).toDTO();
 
+                //Retorna o tarefaDTO com o CODE 200
                 return Ok(tarefaDTO);
             }
             catch (Exception ex) 

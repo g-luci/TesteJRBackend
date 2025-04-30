@@ -60,3 +60,10 @@ D:\Projetos\TesteJRBackend\apiToDo\obj\Debug\net5.0\refint\apiToDo.dll
 D:\Projetos\TesteJRBackend\apiToDo\obj\Debug\net5.0\apiToDo.pdb
 D:\Projetos\TesteJRBackend\apiToDo\obj\Debug\net5.0\apiToDo.genruntimeconfig.cache
 D:\Projetos\TesteJRBackend\apiToDo\obj\Debug\net5.0\ref\apiToDo.dll
+D:\Projetos\TesteJRBackend\apiToDo\bin\Debug\net5.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+D:\Projetos\TesteJRBackend\apiToDo\bin\Debug\net5.0\Microsoft.IdentityModel.JsonWebTokens.dll
+D:\Projetos\TesteJRBackend\apiToDo\bin\Debug\net5.0\Microsoft.IdentityModel.Logging.dll
+D:\Projetos\TesteJRBackend\apiToDo\bin\Debug\net5.0\Microsoft.IdentityModel.Protocols.dll
+D:\Projetos\TesteJRBackend\apiToDo\bin\Debug\net5.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+D:\Projetos\TesteJRBackend\apiToDo\bin\Debug\net5.0\Microsoft.IdentityModel.Tokens.dll
+D:\Projetos\TesteJRBackend\apiToDo\bin\Debug\net5.0\System.IdentityModel.Tokens.Jwt.dll

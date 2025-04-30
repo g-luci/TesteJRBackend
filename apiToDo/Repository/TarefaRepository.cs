@@ -20,9 +20,9 @@ namespace apiToDo.Repository
                 //retornar a lista
                 return _lstTarefas;
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                throw e;
+                throw ex;
             }
         }
 
@@ -41,6 +41,7 @@ namespace apiToDo.Repository
             }
         }
 
+        //Metodo para deletar uma tarefa com base no Id
         public void DeletarTarefa(int id)
         {
             try
@@ -66,35 +67,55 @@ namespace apiToDo.Repository
             }
         }
 
+        //Metodo para atualizar uma tarefa com base em um tarefa passada
         public void AtualizarTarefa(TarefaDTO tarefaAtualizada)
         {
-            var tarefaAlvo = _lstTarefas.FirstOrDefault(t => t.Id == tarefaAtualizada.ID_TAREFA);
+            try
+            {
+                //Variavel que armazena a tarefa alvo com base no Id
+                var tarefaAlvo = _lstTarefas.FirstOrDefault(t => t.Id == tarefaAtualizada.ID_TAREFA);
 
-            //Verifica se existe o Id passado existe
-            if (tarefaAlvo == null)
-            {
-                //Caso a tarefa não exista, uma execeção é disparada
-                throw new Exception($"O usuario esta tentando modificar uma tarefa inexistente");
+                //Verifica se existe o Id passado existe
+                if (tarefaAlvo == null)
+                {
+                    //Caso a tarefa não exista, uma execeção é disparada
+                    throw new Exception($"O usuario esta tentando modificar uma tarefa inexistente");
+                }
+                else
+                {
+                    //Muda o atribuo da tarefa alvo com base na tarefa passada
+                    tarefaAlvo.Descricao = tarefaAtualizada.DS_TAREFA;
+                }
             }
-            else
+            catch (Exception ex)
             {
-                tarefaAlvo.Descricao = tarefaAtualizada.DS_TAREFA;
+                throw ex;
             }
         }
 
+        //Metodo que busca uma tarefa com base no Id
         public Tarefas BuscarTarefa(int id) 
         {
-            var tarefaAlvo = _lstTarefas.FirstOrDefault(t => t.Id == id);
+            try
+            {
+                //Variavel que armazena a tarefa alvo com base no Id
+                var tarefaAlvo = _lstTarefas.FirstOrDefault(t => t.Id == id);
 
-            //Verifica se existe o Id passado existe
-            if (tarefaAlvo == null)
-            {
-                //Caso ele não exista, uma execeção é disparada
-                throw new Exception($"O usuario esta tentando encotrar uma tarefa inexistente");
+                //Verifica se existe o Id passado existe
+                if (tarefaAlvo == null)
+                {
+                    //Caso ele não exista, uma execeção é disparada
+                    throw new Exception($"O usuario esta tentando encotrar uma tarefa inexistente");
+                }
+                else
+                {
+                    //retorna a tarefa alvo
+                    return tarefaAlvo;
+                }
             }
-            else
+            catch (Exception ex)
             {
-                return tarefaAlvo;
+                throw ex;
             }
         }
     }

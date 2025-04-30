@@ -29,8 +29,8 @@ namespace apiToDo
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingleton<ITarefaRepository, TarefaRepository>();
-            services.AddTransient<TarefaSeeder>();
+            services.AddSingleton<ITarefaRepository, TarefaRepository>(); //Injeção de dependencia
+            services.AddTransient<TarefaSeeder>();//Injeção de dependencia
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
@@ -59,9 +59,12 @@ namespace apiToDo
                 endpoints.MapControllers();
             });
 
+            //Cria um escopo de serviço
             using (var scope = app.ApplicationServices.CreateScope())
             {
+                //Solicita a instancia da classe
                 var seeder = scope.ServiceProvider.GetRequiredService<TarefaSeeder>();
+                //chama o metodo para popular
                 seeder.Popular();
             }
         }
