@@ -31,6 +31,12 @@ namespace apiToDo.Repository
         {
             try
             {
+                //Verifica se uma tarefa com aquele Id já existe
+                if(_lstTarefas.Any(t => t.Id == tarefas.Id))
+                {
+                    throw new Exception("A tarefa já existe.");
+                }
+
                 //Adiciona a tarefa na lista de tarefa
                 _lstTarefas.Add(tarefas);
 

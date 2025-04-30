@@ -3,12 +3,14 @@ using apiToDo.Seeder;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Microsoft.OpenApi.Writers;
@@ -39,6 +41,7 @@ namespace apiToDo
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "apiToDo", Version = "v1" });
 
+                //Define uma configuração de segurança
                 c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                 {
                     Description = "Insira o token JWT no formato: Bearer {seu token}",
@@ -48,9 +51,11 @@ namespace apiToDo
                     Scheme = "Bearer"
                 });
 
+                //Define a exigência de segurança para as rotas protegidas
                 c.AddSecurityRequirement(new OpenApiSecurityRequirement()
                 {
                     {
+                        // Define o esquema utilizado
                         new OpenApiSecurityScheme
                         {
                             Reference = new OpenApiReference
@@ -62,6 +67,7 @@ namespace apiToDo
                             Name = "Bearer",
                             In = ParameterLocation.Header,
                         },
+                        //Lista de escopos
                         new List<string>()
                     }
                 });
@@ -94,6 +100,31 @@ namespace apiToDo
                     ValidateIssuer = false,
                     //Desabilita validação do Audience
                     ValidateAudience = false
+                };
+
+                x.Events = new JwtBearerEvents
+                {
+                    //Evento disparado quando a autenticação falha
+                    OnChallenge = context =>
+                    {
+                        //Impede o comportamento padrão de retornar uma resposta automática
+                        context.HandleResponse();
+
+                        //Define status code da resposta
+                        context.Response.StatusCode = 401;
+                        //Define o tipo da resposta
+                        context.Response.ContentType = "application/json";
+
+                        //Cria uma mensagem personalizada serializando para JSON
+                        var result = System.Text.Json.JsonSerializer.Serialize(new
+                        {
+                            status = 401,
+                            message = "Token ausente, inválido ou expirado. Acesso negado."
+                        });
+
+                        //Retorna o JSON
+                        return context.Response.WriteAsync(result);
+                    }
                 };
             });
         }
