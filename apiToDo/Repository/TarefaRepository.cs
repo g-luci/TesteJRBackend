@@ -46,10 +46,10 @@ namespace apiToDo.Repository
             try
             {
                 //Variavel que armazena a tarefa alvo com base no Id
-                var response = _lstTarefas.FirstOrDefault(t => t.Id == id);
+                var tarefaAlvo = _lstTarefas.FirstOrDefault(t => t.Id == id);
 
                 //Verifica se existe o Id passado existe
-                if (response == null)
+                if (tarefaAlvo == null)
                 {
                     //Caso ele não exista, uma execeção é disparada
                     throw new Exception($"O usuario esta tentando deletar a tarefa de codigo {id}");
@@ -57,12 +57,28 @@ namespace apiToDo.Repository
                 else
                 {
                     //Remove a tarefa alvo, passando a tarefa alvo armazenada na variavel response
-                    _lstTarefas.Remove(response);
+                    _lstTarefas.Remove(tarefaAlvo);
                 }
             }
             catch (Exception ex)
             {
                 throw ex;
+            }
+        }
+
+        public void AtualizarTarefa(TarefaDTO tarefaAtualizada)
+        {
+            var tarefaAlvo = _lstTarefas.FirstOrDefault(t => t.Id == tarefaAtualizada.ID_TAREFA);
+
+            //Verifica se existe o Id passado existe
+            if (tarefaAlvo == null)
+            {
+                //Caso a tarefa não exista, uma execeção é disparada
+                throw new Exception($"O usuario esta tentando modificar a tarefa inexistente");
+            }
+            else
+            {
+                tarefaAlvo.Descricao = tarefaAtualizada.DS_TAREFA;
             }
         }
     }

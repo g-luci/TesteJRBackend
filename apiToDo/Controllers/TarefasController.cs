@@ -89,5 +89,22 @@ namespace apiToDo.Controllers
                 return StatusCode(400, new { msg = $"Ocorreu um erro em sua API {ex.Message}" });
             }
         }
+
+        [HttpPost("AtualzarTarefa")]
+        public ActionResult AtualizarTarefa([FromBody] TarefaDTO tarefa)
+        {
+            try
+            {
+                _trefaRepository.AtualizarTarefa(tarefa);
+
+                var tarefaDTO = _trefaRepository.lstTarefas().Select(x => x.toDTO()).ToList();
+
+                return Ok(tarefaDTO);
+            }
+            catch(Exception ex) 
+            {
+                return StatusCode(400, new { msg = $"Ocorreu um erro em sua API {ex.Message}" });
+            } 
+        }
     }
 }

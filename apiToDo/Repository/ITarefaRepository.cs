@@ -1,4 +1,5 @@
-﻿using apiToDo.Models;
+﻿using apiToDo.DTO;
+using apiToDo.Models;
 using System.Collections.Generic;
 
 namespace apiToDo.Repository
@@ -9,5 +10,7 @@ namespace apiToDo.Repository
         List<Tarefas> lstTarefas();
         void InserirTarefa(Tarefas tarefas);
         void DeletarTarefa(int id);
+
+        void AtualizarTarefa(TarefaDTO tarefa);
     }
 }
