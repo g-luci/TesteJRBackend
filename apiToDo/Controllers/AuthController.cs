@@ -1,4 +1,5 @@
-﻿using apiToDo.Services;
+﻿using apiToDo.Models.ViewModel;
+using apiToDo.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace apiToDo.Controllers
@@ -9,10 +10,10 @@ namespace apiToDo.Controllers
     public class AuthController : ControllerBase
     {
         [HttpPost("Autenticacao")]
-        public ActionResult Auth(string username, string password)
+        public ActionResult Auth([FromQuery] LoginViewModel login)
         {
             //Verfica se o usernmae e password são validos
-            if (username == "admin" && password == "123")
+            if (login.Username == "admin" && login.Userpassword == "123")
             {
                 //Gera um token utilizando o metodo GeneretaToken
                 var token = TokenService.GenerateToken(new Models.Tarefas());

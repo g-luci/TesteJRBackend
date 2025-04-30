@@ -20,7 +20,7 @@ namespace apiToDo.Controllers
             _trefaRepository = trefaRepository;
         }
 
-        [Authorize]
+        
         [HttpGet("lstTarefas")]
         public ActionResult lstTarefas()
         {
@@ -111,17 +111,38 @@ namespace apiToDo.Controllers
         }
 
         [HttpGet("BuscarTarefa")]
-        public ActionResult BuscarTarefa([FromQuery] int id)
+        public ActionResult BuscarTarefa([FromQuery] int ID_TAREFA)
         {
             try
             {
                 //Busca a tarefa com base no Id e logo em seguida, transforma em um DTO
-                var tarefaDTO = _trefaRepository.BuscarTarefa(id).toDTO();
+                var tarefaDTO = _trefaRepository.BuscarTarefa(ID_TAREFA).toDTO();
 
                 //Retorna o tarefaDTO com o CODE 200
                 return Ok(tarefaDTO);
             }
             catch (Exception ex) 
+            {
+                return StatusCode(400, new { msg = $"Ocorreu um erro em sua API {ex.Message}" });
+            }
+        }
+
+
+        //Rota criada apenas para exemplificar o Authorize
+        [Authorize]
+        [HttpGet("Auth/lstTarefas")]
+        public ActionResult lstTarefasAuth()
+        {
+            try
+            {
+                //Lista contendo as tarefas como DTO
+                var tarefaDTO = _trefaRepository.lstTarefas().Select(x => x.toDTO()).ToList();
+
+                //Retorna a lista de tarefaDTO com o CODE 200
+                return Ok(tarefaDTO);
+            }
+
+            catch (Exception ex)
             {
                 return StatusCode(400, new { msg = $"Ocorreu um erro em sua API {ex.Message}" });
             }

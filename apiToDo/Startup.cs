@@ -40,6 +40,7 @@ namespace apiToDo
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "apiToDo", Version = "v1" });
+                c.EnableAnnotations();
 
                 //Define uma configuração de segurança
                 c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
