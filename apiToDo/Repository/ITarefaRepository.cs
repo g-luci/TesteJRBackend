@@ -12,5 +12,7 @@ namespace apiToDo.Repository
         void DeletarTarefa(int id);
 
         void AtualizarTarefa(TarefaDTO tarefa);
+
+        Tarefas BuscarTarefa(int id);
     }
 }

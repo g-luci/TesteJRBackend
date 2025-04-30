@@ -106,5 +106,20 @@ namespace apiToDo.Controllers
                 return StatusCode(400, new { msg = $"Ocorreu um erro em sua API {ex.Message}" });
             } 
         }
+
+        [HttpGet("BuscarTarefa")]
+        public ActionResult BuscarTarefa([FromQuery] int id)
+        {
+            try
+            {
+                var tarefaDTO = _trefaRepository.BuscarTarefa(id).toDTO();
+
+                return Ok(tarefaDTO);
+            }
+            catch (Exception ex) 
+            {
+                return StatusCode(400, new { msg = $"Ocorreu um erro em sua API {ex.Message}" });
+            }
+        }
     }
 }

@@ -74,11 +74,27 @@ namespace apiToDo.Repository
             if (tarefaAlvo == null)
             {
                 //Caso a tarefa não exista, uma execeção é disparada
-                throw new Exception($"O usuario esta tentando modificar a tarefa inexistente");
+                throw new Exception($"O usuario esta tentando modificar uma tarefa inexistente");
             }
             else
             {
                 tarefaAlvo.Descricao = tarefaAtualizada.DS_TAREFA;
+            }
+        }
+
+        public Tarefas BuscarTarefa(int id) 
+        {
+            var tarefaAlvo = _lstTarefas.FirstOrDefault(t => t.Id == id);
+
+            //Verifica se existe o Id passado existe
+            if (tarefaAlvo == null)
+            {
+                //Caso ele não exista, uma execeção é disparada
+                throw new Exception($"O usuario esta tentando encotrar uma tarefa inexistente");
+            }
+            else
+            {
+                return tarefaAlvo;
             }
         }
     }
