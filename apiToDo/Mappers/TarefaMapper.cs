@@ -11,7 +11,7 @@ namespace apiToDo.Mappers
             //Retorna um DTO com base nos atributos da entidade
             return new TarefaDTO
             {
-                ID_TAREFA = tarefa.Id,
+                ID_TAREFA = tarefa.Id, 
                 DS_TAREFA = tarefa.Descricao
             };
         }

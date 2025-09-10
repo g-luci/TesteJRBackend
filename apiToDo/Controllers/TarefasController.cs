@@ -69,7 +69,7 @@ namespace apiToDo.Controllers
             }
         }
 
-        [HttpPost("DeletarTarefa")]
+        [HttpDelete("DeletarTarefa")]
         public ActionResult DeleteTask([FromQuery] int ID_TAREFA)
         {
             try
@@ -90,7 +90,7 @@ namespace apiToDo.Controllers
             }
         }
 
-        [HttpPost("AtualzarTarefa")]
+        [HttpPatch("AtualzarTarefa")]
         public ActionResult AtualizarTarefa([FromBody] TarefaDTO tarefa)
         {
             try
